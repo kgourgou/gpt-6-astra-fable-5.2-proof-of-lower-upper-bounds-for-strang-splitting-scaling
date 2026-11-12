@@ -1,0 +1,284 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\one}{\mathbf{1}}
+
+\title{Local Order of Strang Splitting for Finite-State Markov Generators:\\
+a Short Proof}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Statement}
+
+For square matrices $B,C$ of the same size put
+$$
+A=B+C,\qquad S(h)=e^{hB/2}e^{hC}e^{hB/2},\qquad P(h)=e^{hA}.
+$$
+The splitting is \emph{exact} if $S(h)=P(h)$ for all real $h$. Otherwise
+$p(B,C)$ denotes the order of vanishing of $S(h)-P(h)$ at $h=0$:
+$$
+S(h)-P(h)=h^{p}K+O(h^{p+1}),\qquad K\neq 0 .
+$$
+A \emph{Markov generator} is a real matrix with nonnegative off-diagonal
+entries and zero row sums. For $n\ge 2$ let
+$$
+M_n=\sup\{\,p(B,C): B,C \text{ are } n\times n \text{ Markov generators
+with nonexact splitting}\,\}.
+$$
+
+\begin{theorem}\label{thm:main}
+For every $n\ge 2$,
+$$
+2\left\lfloor \frac n2\right\rfloor+1\;\le\; M_n\;\le\;\max\{3,\,(n-1)(n-2)+1\}.
+$$
+The lower bound is attained by generators whose off-diagonal entries are
+all strictly positive. In particular $M_2=M_3=3$.
+\end{theorem}
+
+Throughout, $[U,V]=UV-VU$, $\ad_U V=[U,V]$, and we fix the notation
+$$
+\boxed{\;D=B+2C,\qquad T=\ad_B,\qquad Z=\ad_D.\;}
+$$
+We use $e^{U}Ve^{-U}=e^{\ad_U}V$ freely. Lemmas~\ref{lem:parity}--\ref{lem:arb}
+hold for arbitrary complex square matrices.
+
+\section{The order criterion}
+
+\begin{lemma}[Parity]\label{lem:parity}
+If the splitting is nonexact, then $p(B,C)$ is odd.
+\end{lemma}
+
+\begin{proof}
+For small $h$ the principal logarithm $\Lambda(h)=\log S(h)$ is analytic,
+and $S(-h)=S(h)^{-1}$ gives $\Lambda(-h)=-\Lambda(h)$. Since
+$S(h)=I+hA+O(h^2)$, we have $\Lambda(h)=hA+O(h^2)$. If $\Lambda(h)=hA$
+identically near $0$, then $S=P$ near $0$ and hence everywhere by
+analyticity. Otherwise $\Lambda(h)=hA+h^{q}K+O(h^{q+1})$ with $K\ne0$,
+and $q$ is odd because $\Lambda$ is odd. Both $\Lambda(h)$ and $hA$ are
+$O(h)$, so
+$$
+S(h)-P(h)=e^{\Lambda(h)}-e^{hA}=h^{q}K+O(h^{q+1}),
+$$
+and $p=q$.
+\end{proof}
+
+\begin{lemma}[Order criterion]\label{lem:crit}
+The splitting is exact if and only if $Z\,T^{s}D=0$ for every $s\ge1$,
+that is, if and only if $D$ commutes with $\ad_B^{s}D$ for all $s\ge 1$.
+Otherwise
+$$
+p(B,C)=2+\min\{\,s\ge 1: Z\,T^{s}D\neq 0\,\}.
+$$
+In particular $p\ge 3$, and $p>3$ if and only if $[D,[B,D]]=0$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: a defect function.}
+Let $E=S-P$ and $L=S'S^{-1}-A$. Since $P'=AP$,
+\begin{equation}\label{eq:LE}
+L=(E'-AE)\,S^{-1}.
+\end{equation}
+Differentiating the three factors of $S$,
+$$
+S'S^{-1}=\tfrac12 B+e^{hT/2}C+\tfrac12\,e^{hT/2}e^{h\ad_C}B .
+$$
+Put $R=e^{-hT/2}L$. Using $e^{-hT/2}B=B$,
+$$
+R(h)=\tfrac12\bigl(e^{h\ad_C}-I\bigr)B-\bigl(e^{-hT/2}-I\bigr)C,
+\qquad
+R'(h)=\tfrac12\bigl(e^{-hT/2}-e^{h\ad_C}\bigr)Q,
+\quad Q=[B,C].
+$$
+
+\emph{Step 2: the order of $R'$ is $p-2$.}
+If $E\equiv0$ then $L\equiv0$ by \eqref{eq:LE}, so $R'\equiv0$.
+Conversely, if $R'\equiv0$ then $R\equiv R(0)=0$, so $L\equiv0$, so
+$S'=AS$ with $S(0)=I$, and $S=P$.
+If $E=h^{p}K+O(h^{p+1})$ with $K\ne0$, then \eqref{eq:LE} gives
+$L=p\,h^{p-1}K+O(h^{p})$, and $R$ has the same leading term. Since
+$R(0)=0$, this forces $p\ge2$, and then
+$R'=p(p-1)h^{p-2}K+O(h^{p-1})$ vanishes to order exactly $p-2$.
+
+\emph{Step 3: rewriting in terms of $D$.}
+Since $C=(D-B)/2$, we have $\ad_C=\tfrac12(Z-T)$ and
+$Q=\tfrac12[B,D]=\tfrac12TD$. Hence
+$$
+R'(h)=\sum_{j\ge0}\frac{h^{j}}{j!\,2^{\,j+2}}\,(b_j-a_j),
+\qquad
+a_j=(Z-T)^{j}TD,\quad b_j=(-T)^{j}TD .
+$$
+So the splitting is exact iff $a_j=b_j$ for all $j$, and otherwise
+$p-2=\min\{j:a_j\ne b_j\}$.
+
+\emph{Step 4: induction.}
+Suppose $a_{j-1}=b_{j-1}$ for some $j\ge1$. Then
+$$
+a_j=(Z-T)\,b_{j-1}=(-1)^{j-1}Z\,T^{j}D+b_j .
+$$
+As $a_0=b_0$, it follows that $a_j=b_j$ for all $j<s^*$, where
+$s^*=\min\{s\ge1:ZT^{s}D\ne0\}$, and $a_{s^*}\ne b_{s^*}$ if $s^*$ is
+finite. Thus $p-2=s^*$, and the splitting is exact iff $s^*=\infty$.
+The last claim is the case $s=1$: $ZTD=[D,[B,D]]$.
+\end{proof}
+
+\begin{remark}
+Since $[D,e^{hB}De^{-hB}]=\sum_{s\ge1}\frac{h^{s}}{s!}ZT^{s}D$, the
+criterion reads
+$$
+p(B,C)=2+\operatorname{ord}_{h=0}\,\bigl[D,\;e^{hB}De^{-hB}\bigr],
+$$
+and the splitting is exact iff $D$ commutes with all its conjugates
+$e^{hB}De^{-hB}$. The leading error coefficient for $p=3$ is
+$K=-\tfrac1{48}[D,[B,D]]=-\tfrac1{24}[B+2C,[B,C]]$.
+\end{remark}
+
+\section{Upper bound}
+
+\begin{lemma}\label{lem:arb}
+For $m\times m$ matrices with nonexact splitting, $p(B,C)\le m(m-1)+1$.
+\end{lemma}
+
+\begin{proof}
+Let $W_j=\spn\{T^{s}D:1\le s\le j\}$ and $W=\bigcup_jW_j$. If
+$T^{j+1}D\in W_j$ then $TW_j\subseteq W_j$ and $W=W_j$. Hence
+$\dim W_j=j$ until the chain stabilises, and $W=W_\ell$ with
+$\ell=\dim W$.
+
+Every $T^{s}D$ with $s\ge1$ lies in $\im T$, so
+$\ell\le\operatorname{rank}\ad_B=m^{2}-\dim\ker\ad_B\le m^{2}-m$.
+The last inequality holds because $\dim\ker\ad_B=m$ when $B$ has
+distinct eigenvalues (the centraliser is then the algebra of polynomials
+in $B$), such $B$ are dense, and $\operatorname{rank}\ad_B$ is lower
+semicontinuous in $B$.
+
+If $ZT^{s}D=0$ for $1\le s\le\ell$, then $Z$ vanishes on $W_\ell=W$ and
+the splitting is exact by Lemma~\ref{lem:crit}. So a nonexact pair has
+$s^*\le\ell\le m(m-1)$, i.e.\ $p\le m(m-1)+2$. This number is even and
+$p$ is odd (Lemma~\ref{lem:parity}).
+\end{proof}
+
+\begin{proof}[Proof of the upper bound in Theorem~\ref{thm:main}]
+Let $B,C$ be $n\times n$ Markov generators with nonexact splitting and
+$p>3$. By Lemma~\ref{lem:crit}, $Z^{2}B=-[D,[B,D]]=0$.
+
+\emph{$B$ and $C$ preserve the generalised eigenspaces of $D$.}
+Write $\mathbb C^{n}=\bigoplus_\lambda E_\lambda$ with $E_\lambda$ the
+generalised eigenspaces of $D$, and let
+$B_{\lambda\mu}:E_\mu\to E_\lambda$ be the blocks of $B$. With
+$D|_{E_\lambda}=\lambda+N_\lambda$, $N_\lambda$ nilpotent,
+$$
+(ZB)_{\lambda\mu}=\Phi(B_{\lambda\mu}),\qquad
+\Phi(X)=(\lambda-\mu)X+(N_\lambda X-XN_\mu).
+$$
+Left multiplication by $N_\lambda$ and right multiplication by $N_\mu$
+are commuting nilpotent operators, so $\Phi$ is invertible when
+$\lambda\ne\mu$. Then $\Phi^{2}(B_{\lambda\mu})=0$ forces
+$B_{\lambda\mu}=0$. So $B$, and hence $C=(D-B)/2$, is block diagonal.
+
+\emph{The block at $0$ is exact.}
+$D=B+2C$ is a Markov generator, so $e^{tD}$ is a stochastic matrix for
+$t\ge0$ and $\|e^{tD}\|_\infty=1$. A Jordan block of size $\ge2$ at the
+eigenvalue $0$ would make $e^{tD}$ grow linearly in $t$. Hence
+$E_0=\ker D$, and $E_0\ni\one$ is nonzero. On $E_0$ we have
+$C=-B/2$, so $B$ and $C$ commute there and $S=P$ on $E_0$.
+
+\emph{Conclusion.}
+Let $W'=\bigoplus_{\lambda\ne0}E_\lambda$, of dimension
+$m\le n-1$. Since $S-P=0\oplus(S-P)|_{W'}$, the restricted pair is
+nonexact with the same order, and Lemma~\ref{lem:arb} gives
+$p\le m(m-1)+1\le(n-1)(n-2)+1$.
+\end{proof}
+
+\section{Lower bound}
+
+\begin{lemma}[Shift--corner pair]\label{lem:shift}
+Let $m\ge2$, let $E_{ij}$ be the matrix units, and set
+$$
+B=F=\sum_{i=1}^{m-1}E_{i+1,i},\qquad D=E_{1m},\qquad C=\tfrac12(D-F).
+$$
+Then $B+2C=D$, the splitting is nonexact, and
+$$
+p(B,C)=\begin{cases}m+1,&m\text{ even},\\ m+2,&m\text{ odd}.\end{cases}
+$$
+\end{lemma}
+
+\begin{proof}
+Left and right multiplication by $F$ commute, and
+$F^{a}E_{1m}F^{b}=E_{1+a,\,m-b}$ for $0\le a,b\le m-1$ (zero otherwise).
+Hence
+$$
+T^{s}D=\sum_{\substack{a+b=s\\0\le a,b\le m-1}}(-1)^{b}\binom sb\,
+E_{1+a,\,m-b}.
+$$
+Also $ZE_{ij}=\delta_{mi}E_{1j}-\delta_{j1}E_{im}$, so $Z$ annihilates
+$E_{1+a,m-b}$ unless $a=m-1$ or $b=m-1$. Therefore:
+\begin{itemize}
+\item $ZT^{s}D=0$ for $1\le s\le m-2$;
+\item for $s=m-1$ the terms $(a,b)=(m-1,0)$ and $(0,m-1)$ give
+$ZT^{m-1}D=\bigl(1+(-1)^{m}\bigr)D$;
+\item for $s=m$ and $m\ge 3$ the terms $(m-1,1)$ and $(1,m-1)$ give
+$ZT^{m}D=-m\,E_{1,m-1}+(-1)^{m}m\,E_{2,m}$.
+\end{itemize}
+If $m$ is even, the first nonzero term is at $s=m-1$. If $m$ is odd, it
+is at $s=m$. Apply Lemma~\ref{lem:crit}.
+\end{proof}
+
+\begin{lemma}[Markov embedding]\label{lem:embed}
+Let $B,C$ be real $m\times m$ matrices and $n=m+1$. There are
+$n\times n$ Markov generators $B',C'$ with strictly positive
+off-diagonal entries whose splitting is exact iff that of $B,C$ is, and
+has the same order otherwise.
+\end{lemma}
+
+\begin{proof}
+Let $U$ be an $n\times m$ matrix whose columns are an orthonormal basis
+of $\one^\perp$, and $J=\frac1n\one\one^{\top}$. Then
+$U^{\top}U=I_m$, $U^{\top}\one=0$, $UU^{\top}=I_n-J$. For $\lambda>0$ put
+$$
+B'=U(B-\lambda I_m)U^{\top}=UBU^{\top}+\lambda(J-I_n),\qquad
+C'=U(C-\lambda I_m)U^{\top}.
+$$
+Row sums vanish because $U^{\top}\one=0$. Each off-diagonal entry is an
+entry of $UBU^{\top}$ or $UCU^{\top}$ plus $\lambda/n$, hence positive
+for $\lambda$ large.
+
+Since $(UXU^{\top})(UYU^{\top})=UXYU^{\top}$, we get
+$e^{UXU^{\top}}=J+Ue^{X}U^{\top}$, and $JU=0$. Scalars commute with
+everything, so
+$$
+e^{hB'/2}e^{hC'}e^{hB'/2}-e^{h(B'+C')}
+=e^{-2\lambda h}\,U\bigl(S(h)-P(h)\bigr)U^{\top}.
+$$
+The factor $e^{-2\lambda h}$ never vanishes and $X\mapsto UXU^{\top}$ is
+injective, so exactness and the order of vanishing are preserved.
+\end{proof}
+
+\begin{proof}[Proof of the lower bound and of $M_2=M_3=3$]
+For $n\ge3$, apply Lemma~\ref{lem:embed} to the pair of
+Lemma~\ref{lem:shift} with $m=n-1$. The order is $n$ if $n$ is odd and
+$n+1$ if $n$ is even, i.e.\ $2\lfloor n/2\rfloor+1$.
+
+For $n=2$ take
+$$
+B=\begin{pmatrix}-1&1\\1&-1\end{pmatrix},\qquad
+C=\begin{pmatrix}-1&1\\2&-2\end{pmatrix},\qquad
+[D,[B,D]]=16\begin{pmatrix}1&-1\\1&-1\end{pmatrix}\ne0,
+$$
+so $p=3$ by Lemma~\ref{lem:crit}.
+
+For $n=2,3$ both bounds equal $3$.
+\end{proof}
+
+\end{document}
